@@ -1,0 +1,264 @@
+idea:
+  title: Do Internal Debiasing Edits Actually Change Behavior? A Causal Audit of Erasure
+    and Steering
+  domain: machine_learning
+  problem_statement: 'Gonen and Goldberg showed that geometric debiasing hides bias
+    in static word vectors without truly removing it. It remains unclear whether modern
+    activation-level erasure and steering methods (INLP, LEACE, CAA, FairSteer) genuinely
+    change downstream behavior or merely suppress the probe-accessible signal while
+    leaving behavioral bias intact.
+
+    '
+  hypothesis: 'Among interventions that equally reduce a linear-probe measure of bias,
+    most will fail to proportionally reduce behavioral bias on downstream tasks (BBQ,
+    decision scenarios, open-ended generation). Furthermore, much of the observed
+    behavioral change will not be causally attributable to the intended concept but
+    instead to generic representational distortion introduced by the intervention.
+
+    '
+  research_questions:
+  - id: rq1
+    question: For matched interventions that equally reduce a probe of bias, how much
+      do they reduce behavioral bias on BBQ, decision scenarios, and open-ended generation?
+  - id: rq2
+    question: Is the behavioral change causally attributable to the intended concept,
+      or does it arise from generic distortion of the representation space?
+  - id: rq3
+    question: Do erasure methods (INLP, LEACE, mean-projection) and steering methods
+      (CAA, FairSteer, and related) differ systematically in the signal-hiding vs
+      behavior-change tradeoff?
+  background:
+    description: 'Gonen and Goldberg (2019) demonstrated that geometric debiasing
+      of static word
+
+      embeddings often hides bias rather than eliminating it. The field has since
+      moved
+
+      to activation-level interventions applied inside transformer models: erasure
+      methods
+
+      such as INLP and LEACE project out bias-correlated directions, while steering
+
+      methods such as CAA and FairSteer add or subtract activation vectors to modulate
+
+      model behavior. However, the core validity concern persists: do these interventions
+
+      change what the model actually does, or merely what a probe can detect?
+
+
+      Dobrzeniecka et al. (2025) introduced random-direction and random-magnitude
+      controls
+
+      for evaluating steering interventions, showing that many apparent effects are
+
+      attributable to generic perturbation rather than concept-specific editing. This
+
+      protocol has not yet been applied systematically across the full landscape of
+
+      erasure and steering methods, nor combined with counterfactual and activation
+
+      patching analyses to establish causal specificity.
+
+      '
+    papers:
+    - url: https://arxiv.org/abs/1903.03862
+      description: 'Gonen & Goldberg (2019): Lipstick on a Pig: Debiasing Methods
+        Cover up Systematic Gender Biases in Word Embeddings But do not Remove Them'
+    - url: https://arxiv.org/abs/2004.07667
+      description: 'Ravfogel et al. (2020): INLP - Null It Out: Guarding Protected
+        Attributes by Iterative Nullspace Projection'
+    - url: https://arxiv.org/abs/2306.03819
+      description: 'Belrose et al. (2023): LEACE - Erasing Concepts from Diffusions
+        and Language Models'
+    - url: https://arxiv.org/abs/2312.06681
+      description: 'Turner et al. (2023): Activation Addition: Steering Language Models
+        Without Optimization (CAA)'
+    - url: https://arxiv.org/abs/2310.01405
+      description: 'Dobrzeniecka et al. (2025): Random-direction and random-magnitude
+        controls for steering evaluations'
+  methodology:
+    study_design: Controlled intervention benchmark with causal specificity analysis
+    interventions:
+      erasure_methods:
+      - INLP (Iterative Nullspace Projection)
+      - LEACE (LEAst-squares Concept Erasure)
+      - Mean-projection (subtract group-mean difference direction)
+      steering_methods:
+      - CAA (Contrastive Activation Addition)
+      - FairSteer
+      - 1-2 additional steering variants (e.g., RepE, ITI)
+    models:
+    - Llama-2-7B or Llama-3-8B
+    - Mistral-7B
+    - Pythia-6.9B
+    - OLMo-7B (optional, for diversity)
+    steps:
+    - Implement or adapt all erasure and steering interventions on the same target
+      layers of each model
+    - Train linear probes for the target bias concept (e.g., gender, race) on each
+      model's residual stream
+    - Apply each intervention and calibrate strength so all achieve equal probe-metric
+      reduction (equalization step)
+    - Evaluate behavioral bias on BBQ, CrowS-Pairs, StereoSet, BOLD, and Marked Personas
+    - Run random-direction and random-magnitude controls (per Dobrzeniecka et al.
+      2025) for each intervention
+    - Apply counterfactual and activation patching to test whether behavioral changes
+      are causally specific to the target concept
+    - Report prompt variance across all benchmarks
+    - Analyze whether probe-metric reduction predicts behavioral-metric reduction
+      across methods
+    baselines:
+    - No intervention (unmodified model)
+    - Prompt-only debiasing (system prompt instructing fairness)
+    - CDA fine-tuning (counterfactual data augmentation)
+    - Random-direction control (projection onto / steering with a random direction
+      of equal magnitude)
+    - Random-magnitude control (steering with the correct direction but randomized
+      magnitude)
+    metrics:
+    - Linear-probe accuracy/AUC for bias concept (pre- and post-intervention)
+    - BBQ accuracy and bias score
+    - CrowS-Pairs stereotype score
+    - StereoSet ICAT score (language modeling + stereotype)
+    - BOLD sentiment and regard disparity
+    - Marked Personas bias metrics
+    - 'General capability retention: MMLU, HellaSwag, or similar (to quantify distortion)'
+    - 'Causal specificity ratio: behavioral change from concept-aligned intervention
+      vs random-direction control'
+  datasets:
+  - name: BBQ (Bias Benchmark for QA)
+    purpose: Measure behavioral bias in question answering under ambiguity
+  - name: CrowS-Pairs
+    purpose: Pairwise stereotype preference measurement
+  - name: StereoSet
+    purpose: Joint stereotype and language modeling evaluation
+  - name: BOLD (Bias in Open-ended Language Generation)
+    purpose: Open-ended generation bias via sentiment and regard analysis
+  - name: Marked Personas
+    purpose: Evaluate bias in persona-conditioned generation
+  experimental_protocol:
+    equalization:
+    - For each model, select target layers (middle layers where bias probes are most
+      accurate)
+    - Sweep intervention strength for each method until linear-probe bias metric is
+      reduced to a matched target level
+    - Verify equalization holds across multiple probe seeds
+    causal_controls:
+    - 'Random-direction controls: replace the intervention direction with a random
+      unit vector of equal norm'
+    - 'Random-magnitude controls: use the correct concept direction but randomize
+      the projection/steering magnitude'
+    - 'Activation patching: swap activations at intervention sites between biased
+      and debiased runs to isolate causal contribution'
+    statistical_testing:
+    - Bootstrap confidence intervals on all behavioral metrics
+    - Paired tests (intervention vs control) across prompt sets
+    - Report effect sizes (Cohen's d) alongside p-values
+    - Report prompt-level variance to assess sensitivity to evaluation phrasing
+    ablations:
+    - Target layer selection (early, middle, late)
+    - Intervention strength sweep beyond the equalized point
+    - Multiple bias concepts (gender, race) where benchmarks support it
+  expected_contributions:
+  - A rigorous, reusable protocol for distinguishing signal-hiding from genuine behavior
+    change in activation-level debiasing
+  - Empirical evidence on whether current erasure and steering methods actually reduce
+    behavioral bias or merely suppress probes
+  - 'Quantification of causal specificity: how much behavioral change is concept-specific
+    vs generic distortion'
+  - Systematic comparison of erasure vs steering paradigms on the signal-hiding vs
+    behavior-change axis
+  - Concrete recommendations for practitioners on which methods to trust for deployment
+  expected_outputs:
+  - type: results_table
+    format: csv
+    description: Per-model, per-method behavioral and probe metrics with confidence
+      intervals
+  - type: causal_analysis
+    format: csv
+    description: Specificity ratios comparing concept-aligned interventions to random-direction
+      and random-magnitude controls
+  - type: figures
+    format: png/pdf
+    description: 'Key visualizations:
+
+      1. Probe reduction vs behavioral reduction scatter (the core signal-hiding diagnostic)
+
+      2. Intervention vs random-control behavioral effect comparison (causal specificity)
+
+      3. Capability retention vs bias reduction Pareto frontier
+
+      4. Per-benchmark breakdown across models and methods
+
+      '
+  - type: report
+    format: latex/markdown
+    description: Paper-ready analysis with protocol specification for community reuse
+  success_criteria:
+  - All interventions are equalized to matched probe-metric reduction before behavioral
+    comparison
+  - Random-direction and random-magnitude controls are run for every intervention
+    on every model
+  - Causal specificity is quantified via activation patching for at least 2 models
+  - At least 3 behavioral benchmarks report consistent findings
+  - Capability retention is measured to distinguish debiasing from degradation
+  - Results clearly state whether current methods change behavior or hide signal,
+    with statistical support
+  risks_and_mitigations:
+  - risk: 'Null or negative results: no method genuinely changes behavior beyond generic
+      distortion'
+    mitigation: Null results are publishable and important; frame as a validity audit
+      of the field's most popular tools
+  - risk: Causal controls are difficult to calibrate and may introduce confounds
+    mitigation: Use multiple control types (random direction, random magnitude, activation
+      patching) for triangulation
+  - risk: Behavioral benchmarks (BBQ, CrowS-Pairs) have known limitations and noise
+    mitigation: Use five benchmarks to increase robustness; report prompt variance;
+      discuss benchmark limitations explicitly
+  - risk: Equalization across methods may be approximate
+    mitigation: Sweep a range of equalization targets and show results are robust
+      to the exact match point
+  - risk: Compute cost of running all combinations (methods x models x benchmarks
+      x controls)
+    mitigation: Prioritize 2 models and 3 benchmarks for the core result; extend to
+      remaining combinations if budget allows
+  metadata:
+    author: lei
+    priority: high
+    estimated_duration: 3-5 weeks
+    difficulty: medium
+    tags:
+    - fairness
+    - debiasing
+    - activation-editing
+    - erasure
+    - steering
+    - causal-analysis
+    - behavioral-evaluation
+    - bias-benchmarks
+    - interpretability
+    notes: 'This idea directly targets the field''s top validity concern: whether
+      activation-level
+
+      debiasing methods actually change model behavior or merely hide the signal from
+      probes.
+
+      The combination of probe-equalized comparison, random-direction/magnitude controls,
+
+      and activation patching provides a uniquely rigorous causal audit.
+
+
+      Null or negative results (most methods hide signal rather than change behavior)
+      would
+
+      be highly publishable and impactful, redirecting the community toward methods
+      with
+
+      verified behavioral effects.
+
+      '
+    idea_id: do_internal_debiasing_edits_ac_20260615_213711_e8b40fad
+    created_at: '2026-06-15T21:37:11.440486'
+    status: submitted
+    github_repo_name: internal-debiasing-audit-af4e
+    github_repo_url: https://github.com/Tina-realm/internal-debiasing-audit-af4e
