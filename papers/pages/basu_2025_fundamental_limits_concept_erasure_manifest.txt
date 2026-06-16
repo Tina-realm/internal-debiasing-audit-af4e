@@ -1,0 +1,10 @@
+PDF: papers/basu_2025_fundamental_limits_concept_erasure.pdf
+Total pages: 23
+Pages per chunk: 5
+
+Chunks:
+  basu_2025_fundamental_limits_concept_erasure_chunk_001.pdf: pages 1-5
+  basu_2025_fundamental_limits_concept_erasure_chunk_002.pdf: pages 6-10
+  basu_2025_fundamental_limits_concept_erasure_chunk_003.pdf: pages 11-15
+  basu_2025_fundamental_limits_concept_erasure_chunk_004.pdf: pages 16-20
+  basu_2025_fundamental_limits_concept_erasure_chunk_005.pdf: pages 21-23

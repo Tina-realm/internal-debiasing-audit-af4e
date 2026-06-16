@@ -1,0 +1,12 @@
+PDF: papers/parrish_2022_BBQ_bias_benchmark_QA.pdf
+Total pages: 20
+Pages per chunk: 3
+
+Chunks:
+  parrish_2022_BBQ_bias_benchmark_QA_chunk_001.pdf: pages 1-3
+  parrish_2022_BBQ_bias_benchmark_QA_chunk_002.pdf: pages 4-6
+  parrish_2022_BBQ_bias_benchmark_QA_chunk_003.pdf: pages 7-9
+  parrish_2022_BBQ_bias_benchmark_QA_chunk_004.pdf: pages 10-12
+  parrish_2022_BBQ_bias_benchmark_QA_chunk_005.pdf: pages 13-15
+  parrish_2022_BBQ_bias_benchmark_QA_chunk_006.pdf: pages 16-18
+  parrish_2022_BBQ_bias_benchmark_QA_chunk_007.pdf: pages 19-20

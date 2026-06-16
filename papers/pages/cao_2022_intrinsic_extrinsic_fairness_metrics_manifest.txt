@@ -1,0 +1,8 @@
+PDF: papers/cao_2022_intrinsic_extrinsic_fairness_metrics.pdf
+Total pages: 11
+Pages per chunk: 5
+
+Chunks:
+  cao_2022_intrinsic_extrinsic_fairness_metrics_chunk_001.pdf: pages 1-5
+  cao_2022_intrinsic_extrinsic_fairness_metrics_chunk_002.pdf: pages 6-10
+  cao_2022_intrinsic_extrinsic_fairness_metrics_chunk_003.pdf: page 11

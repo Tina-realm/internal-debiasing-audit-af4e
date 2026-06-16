@@ -1,0 +1,7 @@
+PDF: papers/akyurek_2022_challenges_measuring_bias_generation.pdf
+Total pages: 9
+Pages per chunk: 5
+
+Chunks:
+  akyurek_2022_challenges_measuring_bias_generation_chunk_001.pdf: pages 1-5
+  akyurek_2022_challenges_measuring_bias_generation_chunk_002.pdf: pages 6-9

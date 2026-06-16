@@ -1,0 +1,12 @@
+PDF: papers/ravfogel_2020_INLP_nullspace_projection.pdf
+Total pages: 20
+Pages per chunk: 3
+
+Chunks:
+  ravfogel_2020_INLP_nullspace_projection_chunk_001.pdf: pages 1-3
+  ravfogel_2020_INLP_nullspace_projection_chunk_002.pdf: pages 4-6
+  ravfogel_2020_INLP_nullspace_projection_chunk_003.pdf: pages 7-9
+  ravfogel_2020_INLP_nullspace_projection_chunk_004.pdf: pages 10-12
+  ravfogel_2020_INLP_nullspace_projection_chunk_005.pdf: pages 13-15
+  ravfogel_2020_INLP_nullspace_projection_chunk_006.pdf: pages 16-18
+  ravfogel_2020_INLP_nullspace_projection_chunk_007.pdf: pages 19-20

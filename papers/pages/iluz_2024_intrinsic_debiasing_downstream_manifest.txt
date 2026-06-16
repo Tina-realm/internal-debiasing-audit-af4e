@@ -1,0 +1,7 @@
+PDF: papers/iluz_2024_intrinsic_debiasing_downstream.pdf
+Total pages: 7
+Pages per chunk: 5
+
+Chunks:
+  iluz_2024_intrinsic_debiasing_downstream_chunk_001.pdf: pages 1-5
+  iluz_2024_intrinsic_debiasing_downstream_chunk_002.pdf: pages 6-7

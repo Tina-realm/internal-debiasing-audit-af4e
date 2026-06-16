@@ -1,0 +1,27 @@
+{
+  "success": false,
+  "stages": {
+    "resource_finder": {
+      "success": true,
+      "completion_marker": "/workspaces/internal-debiasing-audit-af4e/.resource_finder_complete",
+      "outputs": {
+        "literature_review": "/workspaces/internal-debiasing-audit-af4e/literature_review.md",
+        "resources_catalog": "/workspaces/internal-debiasing-audit-af4e/resources.md",
+        "papers_dir": "/workspaces/internal-debiasing-audit-af4e/papers",
+        "datasets_dir": "/workspaces/internal-debiasing-audit-af4e/datasets",
+        "code_dir": "/workspaces/internal-debiasing-audit-af4e/code"
+      },
+      "log_file": "/workspaces/internal-debiasing-audit-af4e/logs/resource_finder_claude.log",
+      "transcript_file": "/workspaces/internal-debiasing-audit-af4e/logs/resource_finder_claude_transcript.jsonl",
+      "elapsed_time": 4303.079752445221
+    },
+    "experiment_runner": {
+      "success": false,
+      "return_code": 1,
+      "elapsed_time": 57510.7710545063,
+      "log_file": "/workspaces/internal-debiasing-audit-af4e/logs/execution_claude.log",
+      "transcript_file": "/workspaces/internal-debiasing-audit-af4e/logs/execution_claude_transcript.jsonl"
+    }
+  },
+  "work_dir": "/workspaces/internal-debiasing-audit-af4e"
+}

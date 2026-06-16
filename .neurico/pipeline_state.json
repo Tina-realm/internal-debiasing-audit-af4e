@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-06-15T21:37:23.183895",
+  "stages": {
+    "resource_finder": {
+      "status": "completed",
+      "started_at": "2026-06-15T21:37:23.184607",
+      "completed_at": "2026-06-15T22:49:06.267721",
+      "success": true,
+      "outputs": {
+        "literature_review": "/workspaces/internal-debiasing-audit-af4e/literature_review.md",
+        "resources_catalog": "/workspaces/internal-debiasing-audit-af4e/resources.md",
+        "papers_dir": "/workspaces/internal-debiasing-audit-af4e/papers",
+        "datasets_dir": "/workspaces/internal-debiasing-audit-af4e/datasets",
+        "code_dir": "/workspaces/internal-debiasing-audit-af4e/code"
+      }
+    },
+    "experiment_runner": {
+      "status": "failed",
+      "started_at": "2026-06-15T22:49:06.268279",
+      "completed_at": "2026-06-16T14:47:37.073531",
+      "success": false,
+      "outputs": {
+        "success": false,
+        "return_code": 1,
+        "elapsed_time": 57510.7710545063,
+        "log_file": "/workspaces/internal-debiasing-audit-af4e/logs/execution_claude.log",
+        "transcript_file": "/workspaces/internal-debiasing-audit-af4e/logs/execution_claude_transcript.jsonl"
+      }
+    }
+  },
+  "current_stage": null,
+  "completed": false
+}

@@ -1,0 +1,9 @@
+PDF: papers/orgad_2022_choose_your_lenses_gender_bias_eval.pdf
+Total pages: 18
+Pages per chunk: 5
+
+Chunks:
+  orgad_2022_choose_your_lenses_gender_bias_eval_chunk_001.pdf: pages 1-5
+  orgad_2022_choose_your_lenses_gender_bias_eval_chunk_002.pdf: pages 6-10
+  orgad_2022_choose_your_lenses_gender_bias_eval_chunk_003.pdf: pages 11-15
+  orgad_2022_choose_your_lenses_gender_bias_eval_chunk_004.pdf: pages 16-18

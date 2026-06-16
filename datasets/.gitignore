@@ -1,0 +1,14 @@
+# Exclude large dataset files from git tracking
+*.jsonl
+*.csv
+*.tsv
+*.txt.test
+*.parquet
+*.arrow
+
+# HuggingFace cache
+.cache/
+
+# Keep README and gitignore
+!.gitignore
+!README.md

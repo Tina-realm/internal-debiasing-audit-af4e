@@ -1,0 +1,7 @@
+PDF: papers/kaneko_2024_gaps_pretrain_downstream_bias.pdf
+Total pages: 7
+Pages per chunk: 5
+
+Chunks:
+  kaneko_2024_gaps_pretrain_downstream_bias_chunk_001.pdf: pages 1-5
+  kaneko_2024_gaps_pretrain_downstream_bias_chunk_002.pdf: pages 6-7
